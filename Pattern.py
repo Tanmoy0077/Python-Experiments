@@ -1,4 +1,4 @@
-"""
+
 n = int(input("Enter the number of rows : "))
 i = 1
 while i <= n:
@@ -9,7 +9,7 @@ while i <= n:
         j = j+1
     print()
     i = i + 1
-"""
+
 """
 n =int(input("Enter the number of rows : "))
 i = 1
@@ -46,7 +46,7 @@ while i<=n:
     print()
     i = i + 1
 """
-
+"""
 num = int(input())
 i = 1
 n1 = (num // 2) + 1
@@ -74,7 +74,7 @@ while i >= 1:
         star = star + 1
     print()
     i = i - 1
-
+"""
 """
 n = int(input())
 i = 1
