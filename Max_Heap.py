@@ -1,60 +1,55 @@
-class Heap:
-    def __init__(self, size):
-        self.heap = [None] * size
-        self.pos = 0
-        self.capacity = size
-        self.size = 0
+class Heap_MAX:
+    def __init__(self, l = []):
+        self.data = l
+        self.build_max_heap(len(self.data))
 
-    def leaf(self, pos):
-        if (self.heap[2*pos+1] == None and self.heap[2*pos+2] == None):
-            return True
-        else:
-            return False
-
-    def emright(self, pos):
-        if (self.heap[2*pos+2] == None):
-            return True
-        else:
-            return False
-
-    def isparent(self, pos):
-        if(self.heap[2*pos+1] != None and self.heap[2*pos+2] != None):
-            return True
-        else:
-            return False
+    def max_heapify(self, i, n):
+        left = 2*i + 1
+        right = 2*i + 2
+        max_i = i
+        if left < n and self.data[left] > self.data[i]:
+            max_i = left
+        if right < n and self.data[right] > self.data[max_i]:
+            max_i = right
+        if max_i != i:
+            self.data[i], self.data[max_i] = self.data[max_i], self.data[i]
+            self.max_heapify(max_i, n)
+        
+    def build_max_heap(self, n):
+        for i in range(int(n/2), -1, -1):
+            self.max_heapify(i, n)
+    
+    def del_max(self):
+        if self.data:
+            temp = self.data[0]
+            self.data[0] = self.data[-1]
+            del(self.data[-1])
+            self.max_heapify(0, len(self.data))
+            return temp
 
     def insert(self, val):
-        if self.pos == 0 and self.size == 0:
-            self.heap[0] = val
-            self.size += 1
-        elif self.size == self.capacity:
-            print("Heap Overflow")
-        elif self.leaf(self.pos):
-            self.heap[2*(self.pos)+1] = val
-            self.size += 1
-        elif self.emright(self.pos):
-            self.heap[2*(self.pos)+2] = val
-            self.size += 1
-            self.pos += 1
+        self.data.extend([val])
+        self.build_max_heap(len(self.data))
     
-    def display(self):
-        for i in range(self.pos+1):
-            try:
-                if self.leaf(i):
-                    continue
-                else:
-                    print(f"Parent : {self.heap[i]} Left Child : {self.heap[2*i+1]} Right Child : {self.heap[2*i+2]}")
-            except:
-                pass
+    def __str__(self):
+        return f"{self.data}"
 
-H = Heap(15)
-H.insert(5)
-H.insert(3)
-H.insert(17)
-H.insert(10)
-H.insert(84)
-H.insert(19)
-H.insert(6)
-H.insert(22)
-H.insert(9)
-H.display()
+if __name__ == '__main__':
+    h1 = Heap_MAX([1,2,5,6,9,7])
+    print(h1)
+    print(h1.del_max())
+    print(h1)
+    print(h1.del_max())
+    print(h1)
+    print(h1.del_max())
+    print(h1)
+    print(h1.del_max())
+    print(h1)
+    print(h1.del_max())
+    print(h1)
+    print(h1.del_max())
+    h1.insert(10)
+    h1.insert(3)
+    h1.insert(7)
+    print(h1)
+    
